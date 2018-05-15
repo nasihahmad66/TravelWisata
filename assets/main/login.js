@@ -25,7 +25,7 @@ login.recordLogin = ko.mapping.fromJS(login.newRecordLogin())
 
 login.doRegister = function() {
 	data = ko.mapping.toJS(login.recordRegister)
-	url = "login/DoRegister"
+	url = "login_page/DoRegister"
 	param = {
 		Data : data
 	}
@@ -46,8 +46,8 @@ login.doRegister = function() {
         	// $("#wisataModal").modal("hide")
         	model.Processing(true)
             ajaxFormPost(url, param, function(res){
-                if (!res) {
-                    swal("Gagal", "Gagal menyimpan data", "error")
+                if (res != "OK") {
+                    swal("Gagal", res, "error")
                 }else{
                     swal({
                     title: "Berhasil!",

@@ -75,9 +75,29 @@
                 <a class="nav-item nav-link" href="#">Ball Bearings</a>
                 <a class="nav-item nav-link" href="#">TNT Boxes</a>
             </div>
-            <div class="navbar-nav">
+            <!-- <div class="navbar-nav">
                 <a class="nav-item nav-link" href="#">Logout</a>
-            </div>
+
+            </div> -->
+            <ul class="navbar-nav">
+                <?php if ($this->session->userdata('LOGIN')!= TRUE): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Masuk</a>
+                    </li>
+                <?php endif ?>
+                <?php if ($this->session->userdata('LOGIN') == TRUE): ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        <?= $this->session->userdata('NAMA_CUSTOMER'); ?>
+                      </a>
+                        <div class="dropdown-menu bg-dark">
+                            <a class="dropdown-item" href="<?= base_url() ?>index.php/login_page/DoLogout">Logout</a>
+                            <!-- <a class="dropdown-item" href="#">Link 2</a>
+                            <a class="dropdown-item" href="#">Link 3</a> -->
+                        </div>
+                    </li>
+                <?php endif ?>
+            </ul>
         </div>
     </nav>
 
