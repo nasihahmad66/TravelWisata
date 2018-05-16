@@ -259,4 +259,5 @@ transaksi.init = function() {
 
 $(function() {
     transaksi.init()
+    transaksi.searchWhenEnterPressed()
 })
