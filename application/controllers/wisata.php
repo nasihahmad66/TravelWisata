@@ -58,12 +58,9 @@ class Wisata extends CI_Controller {
 		$id = $this->input->post("ID");
 
 		$config['upload_path'] = './assets/uploads/';
-		$config['allowed_types'] = 'gif|jpg|png';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg';
 		$config['max_size']  = '500';
 		$config['file_name'] = md5($id);
-
-		// $config['max_width']  = '1024';
-		// $config['max_height']  = '768';
 		
 		$this->load->library('upload', $config);
 		$this->upload->initialize($config);

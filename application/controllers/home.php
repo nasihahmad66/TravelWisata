@@ -18,7 +18,7 @@ class Home extends CI_Controller {
 
 	public function GetDataWisata()
 	{
-		$result = $this->wisata_model->GetWisata();
+		$result = $this->wisata_model->GetWisataHavePaket();
 
 		echo json_encode($result);
 	}

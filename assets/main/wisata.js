@@ -280,7 +280,7 @@ wisata.uploadImage = function() {
             $("#uploadFileModal").modal("hide")
             swal({
             title: "Berhasil!",
-            text: "Data berhasil dihapus!",
+            text: "Data berhasil diperbarui!",
             type: "success",
             confirmButtonColor: "#3da09a"
             }).then(() => {

@@ -43,6 +43,10 @@
     <script src="<?= base_url() ?>assets/plugins/knockout/knockout.mapping-latest.js"></script>
     <script src="<?= base_url() ?>assets/plugins/knockout/knockout-kendo.min.js"></script>
 
+    <!-- MOMENT -->
+    <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.min.js"></script>
+
 
     <!-- Common -->
     <script src="<?= base_url() ?>assets/dist/js/common.js"></script>
@@ -66,14 +70,14 @@
     </div>
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand" href="#">My_Travel</a>
+        <a class="navbar-brand" href="<?= base_url() ?>index.php/home">My_Travel</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="#">Ball Bearings</a>
-                <a class="nav-item nav-link" href="#">TNT Boxes</a>
+                <!-- <a class="nav-item nav-link" href="#">Ball Bearings</a>
+                <a class="nav-item nav-link" href="#">TNT Boxes</a> -->
             </div>
             <!-- <div class="navbar-nav">
                 <a class="nav-item nav-link" href="#">Logout</a>
@@ -82,10 +86,13 @@
             <ul class="navbar-nav">
                 <?php if ($this->session->userdata('LOGIN')!= TRUE): ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Masuk</a>
+                        <a class="nav-link" href="<?= base_url() ?>index.php/login_page">Masuk</a>
                     </li>
                 <?php endif ?>
                 <?php if ($this->session->userdata('LOGIN') == TRUE): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url() ?>index.php/riwayat_transaksi">Riwayat Transaksi</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                         <?= $this->session->userdata('NAMA_CUSTOMER'); ?>

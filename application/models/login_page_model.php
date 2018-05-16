@@ -45,6 +45,29 @@ class Login_page_model extends CI_Model {
 		}
 	}
 
+	function ValidLogin($data)
+	{
+		$username = $data["USERNAME_CUSTOMER"];
+		$password = $data["PASSWORD_CUSTOMER"];
+
+		$this->db->where('USERNAME_CUSTOMER', $username);
+		$this->db->where('PASSWORD_CUSTOMER', md5($password));
+		$result = $this->db->get('customer')->result();
+
+		if (count($result) > 0) {
+			$array = array(
+				'LOGIN' => true,
+				'ID_CUSTOMER' => $result[0]->ID_CUSTOMER,
+				'NAMA_CUSTOMER' => $result[0]->NAMA_CUSTOMER
+			);
+			
+			$this->session->set_userdata( $array );
+			return "OK";
+		}else{
+			return "Username atau Password salah";
+		}
+	}
+
 }
 
 /* End of file login_page_model.php */

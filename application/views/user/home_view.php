@@ -11,7 +11,7 @@
 			</div> 
 			<div class="card-footer">
 				<div class="pull-right">
-					<button class="btn btn-success" data-bind="click: function(data) {console.log(data)}">pesan</button>
+					<button class="btn btn-success" data-bind="click: function(data) {home.pesan(data)}">pesan</button>
 				</div>
 			</div>
 		</div>

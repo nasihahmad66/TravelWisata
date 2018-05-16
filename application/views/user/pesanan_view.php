@@ -56,7 +56,7 @@
 		                </div>
 
 		                <div class="form-group">
-		                    <label>Kuota Maksimal</label>
+		                    <label>Kuota Tersisa</label>
 		                    <input type="number" class="form-control input-form" data-bind="value: KUOTA_MAKSIMAL" disabled>
 		                </div>
 		            </div>

@@ -20,6 +20,13 @@ class Login_page extends CI_Controller {
 		
 	}
 
+	public function DoLogin()
+	{
+		$data = $this->input->post("Data");
+		$message = $this->login_model->ValidLogin($data);
+		echo json_encode($message);
+	}
+
 	public function DoRegister()
 	{
 		$data = $this->input->post("Data");
@@ -37,7 +44,7 @@ class Login_page extends CI_Controller {
 	public function DoLogout()
 	{
 		session_destroy();
-		redirect('login_page','refresh');
+		redirect('home','refresh');
 	}
 
 }

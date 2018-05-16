@@ -8,6 +8,13 @@ class Wisata_model extends CI_Model {
 		return $this->db->get('wisata')->result();
 	}
 
+	public function GetWisataHavePaket()
+	{
+		$this->db->join('paket_harga', 'paket_harga.ID_WISATA = wisata.ID_WISATA');
+		$this->db->group_by('wisata.ID_WISATA');
+		return $this->db->get('wisata')->result();
+	}
+
 	public function GetAllDataPaketHarga()
 	{
 		return $this->$this->db->get('paket_harga')->result();
