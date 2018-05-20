@@ -103,7 +103,15 @@
 				</div>
 			</div>
 			<div class="card-footer">
-				<button class="btn btn-success pull-right" type="submit" onclick="pesan.prosesPesan()">Pesan</button>
+				<?php if ($this->session->flashdata('ID_PAKET') == null): ?>
+					<button class="btn btn-success pull-right" type="submit" onclick="pesan.prosesPesan()">Pesan</button>
+				<?php else: ?>
+					<button class="btn btn-warning pull-right" type="submit" onclick="pesan.prosesUbah()">Ubah Pesanan</button>
+					<a href="<?= base_url() ?>index.php/riwayat_transaksi" class="btn btn-info" role="button">Kembali</a>
+					<script type="text/javascript">
+						var dataorder = <?= $dataorder ?>
+					</script>
+				<?php endif ?>
 			</div>
 		</div>
 	</div>

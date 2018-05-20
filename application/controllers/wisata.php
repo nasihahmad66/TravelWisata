@@ -51,6 +51,8 @@ class Wisata extends CI_Controller {
 	{
 		$ID_WISATA = $this->input->post("ID_WISATA");
 		
+		$result = $this->wisata_model->DeleteWisata($ID_WISATA);
+		echo json_encode($result);
 	}
 
 	public function UploadImage()

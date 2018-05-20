@@ -55,6 +55,17 @@ class Wisata_model extends CI_Model {
 		}
 	}
 
+	public function DeleteWisata($ID_WISATA)
+	{
+		$this->db->where('ID_WISATA', $ID_WISATA);
+		$this->db->delete('wisata');
+		if ($this->db->affected_rows() > 0) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 	public function SetImage($id, $namafile)
 	{
 		$this->db->where('ID_WISATA', $id);

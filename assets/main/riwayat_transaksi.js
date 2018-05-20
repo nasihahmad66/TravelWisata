@@ -4,12 +4,14 @@ transaksi.dataMasterTransaksi = ko.observableArray([])
 transaksi.textSearch = ko.observable("")
 transaksi.ShowDetail = ko.observable(false)
 transaksi.showOrder = ko.observable(true)
-transaksi.showConfirm = ko.observable(false)
+transaksi.showBtnCancel = ko.observable(true)
+transaksi.showBtnPrint = ko.observable(false)
 
 
 transaksi.newDataDetailTransaksi = function() {
     data = {
         ID_ORDER : "", 
+        ID_WISATA : "",
         NAMA_WISATA : "",
         NAMA_PAKET : "",
         KOTA : "",
@@ -131,11 +133,17 @@ transaksi.showEdit = function(ID_ORDER) {
             transaksi.showOrder(true)
         }else if (data.STATUS == "confirmed") {
             $("#imgShow").attr( "src", base_url+"assets/uploads/"+data.BUKTI_BAYAR)
-            transaksi.showConfirm(true)
+            transaksi.showBtnPrint(true)
             transaksi.showOrder(false)
-        }else{
+            transaksi.showBtnCancel(false)
+        }else if (data.STATUS == "waiting") {
             $("#imgShow").attr( "src", base_url+"assets/uploads/"+data.BUKTI_BAYAR)
             transaksi.showOrder(false)
+            transaksi.showBtnCancel(true)
+        }else{
+            transaksi.showBtnPrint(false)
+            transaksi.showOrder(false)
+            transaksi.showBtnCancel(false)
         }
         ko.mapping.fromJS(data, transaksi.dataDetailTransaksi)
     })
@@ -249,6 +257,11 @@ transaksi.printTiket = function(selector) {
     kendo.drawing.drawDOM($(selector)).then(function(group){
         kendo.drawing.pdf.saveAs(group, "Transaksi"+date+".pdf");
     });
+}
+
+transaksi.ubahTransaksi = function() {
+    var ID_ORDER = transaksi.dataDetailTransaksi.ID_ORDER()
+    window.location.assign(base_url+"index.php/pesan/UbahPesanan/"+ID_ORDER)
 }
 
 transaksi.init = function() {

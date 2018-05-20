@@ -176,7 +176,7 @@ wisata.saveData = function() {
 wisata.deleteWisata = function($ID_WISATA) {
 	url = "wisata/DeleteWisata"
 	param = {
-		ID : $ID_WISATA
+		ID_WISATA : $ID_WISATA
 	}
 
 	swal({
@@ -270,7 +270,7 @@ wisata.uploadImage = function() {
     formData.append("fileUpload", attachment.files[0]);
     formData.append("ID", wisata.idWisata());
     if (attachment.files.length == 0) {
-        return swal('Error', 'Anda belum menginputkan bukti transfer', 'error')
+        return swal('Error', 'Anda belum menginputkan gambar wisata', 'error')
     }
 
     var url = base_url+"index.php/wisata/UploadImage"

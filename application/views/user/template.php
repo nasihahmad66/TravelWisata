@@ -117,7 +117,10 @@
     </div>
 
     <div class="jumbotron text-center" style="margin-bottom:0">
-        <p>Footer</p>
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 1.0.0
+        </div>
+        <strong>Copyright &copy; 2018 <a href="<?= base_url() ?>index.php/home">TravelWisata</a>.</strong> All rights reserved.
     </div>
     <script type="text/javascript">
         ko.applyBindings(model);

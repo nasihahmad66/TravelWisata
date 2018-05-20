@@ -149,14 +149,18 @@
                     <div class="col-md-4">
                         <button class="btn btn-block" type="submit" data-bind="click: function(){transaksi.ShowDetail(false)}">Kembali</button>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" data-bind="visible: transaksi.showBtnCancel()">
                         <button class="btn btn-danger btn-block" type="submit" onclick="transaksi.batalkanPesanan()">Batalakan</button>
                     </div>
-                    <div class="col-md-4" data-bind="visible: transaksi.showConfirm()">
-                        <button class="btn btn-success btn-block" type="submit" onclick="transaksi.printTiket('#ticket')">PrintTicket</button>
+                    <div class="col-md-4" data-bind="visible: transaksi.showBtnPrint()">
+                        <button class="btn btn-success btn-block" type="submit" onclick="transaksi.printTiket('#ticket')">Print Ticket</button>
+                    </div>
+                    <div class="col-md-4" data-bind="visible: transaksi.showOrder()">
+                        <button class="btn btn-warning btn-block" type="submit" onclick="transaksi.ubahTransaksi()">Ubah Transaksi</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+

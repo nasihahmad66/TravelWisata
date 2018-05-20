@@ -14,6 +14,7 @@ class Pesan_model extends CI_Model {
 
 	public function CheckKuota($data)
 	{
+		$idorder = $data["ID_ORDER"];
 		$idPaket = $data["ID_PAKET"];
 		$tanggalBerangkat = $data["TANGGAL_BERANGKAT"];
 		$tanggalKembali = $data["TANGGAL_KEMBALI"];
@@ -21,6 +22,7 @@ class Pesan_model extends CI_Model {
 		$this->db->select('SUM(KUOTA_PESAN) as TERPAKAI, KUOTA_MAKSIMAL, KUOTA_MINIMAL');
 		$this->db->join('order', 'order.ID_PAKET = paket_harga.ID_PAKET');
 
+		$this->db->where('order.ID_ORDER!=', $idorder);
 		$this->db->where('order.STATUS !=', 'canceled');
 		$this->db->where('paket_harga.ID_PAKET', $idPaket);
 		$where = "TANGGAL_KEMBALI BETWEEN '$tanggalBerangkat' AND '$tanggalKembali'";
@@ -51,6 +53,29 @@ class Pesan_model extends CI_Model {
 			return "";
 		}else{
 			return "Gagal menyimpan data";
+		}
+	}
+
+	public function UpdatePesanan($data)
+	{
+		$object = array(
+			"ID_CUSTOMER"		=> $this->session->userdata('ID_CUSTOMER'),
+			"ID_PAKET"			=> $data["ID_PAKET"],
+			"KUOTA_PESAN"		=> $data["KUOTA_PESAN"],
+			"TOTAL_TRANSAKSI"	=> $data["TOTAL_TRANSAKSI"],
+			"TANGGAL_TRANSAKSI"	=> date("Y-m-d"),
+			"TANGGAL_BERANGKAT"	=> $data["TANGGAL_BERANGKAT"],
+			"TANGGAL_KEMBALI"	=> $data["TANGGAL_KEMBALI"],
+			"BUKTI_BAYAR"		=> null,
+			"STATUS"			=> "order"
+		);
+
+		$this->db->where('ID_ORDER', $data["ID_ORDER"]);
+		$this->db->update('order', $object);
+		if ($this->db->affected_rows() > 0) {
+			return "";
+		}else{
+			return "Gagal mengubah data";
 		}
 	}
 

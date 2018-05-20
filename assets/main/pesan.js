@@ -22,6 +22,7 @@ pesan.newRecordPesana = function() {
 		HARGA			: 0,
 		JENIS_HARGA		: "",
 		DURASI_WISATA	: 0
+		// ID_WISATA		: "",
 	}
 
 	return data;
@@ -31,12 +32,31 @@ pesan.recordPesan = ko.mapping.fromJS(pesan.newRecordPesana())
 pesan.getDataPaket = function() {
 	var str = window.location.href;
 	str = str.split("/");
-	var id = str[7];
+	
+	if (str[6] == "UbahPesanan") {
 
-	var url = base_url+"index.php/pesan/GetPaket/"+id;
-	$.getJSON(url,function(data) {
-		pesan.dataMasterPaket(data)
-	})
+		var id = dataorder.ID_WISATA
+		var url = base_url+"index.php/pesan/GetPaket/"+id;
+
+		$.getJSON(url,function(data) {
+			pesan.dataMasterPaket(data)
+		})
+
+		pesan.recordPesan.ID_ORDER(dataorder.ID_ORDER);
+		// $('#dropdownPaket').data('kendoDropDownList').value(dataorder.ID_PAKET);
+		// pesan.recordPesan.ID_PAKET(dataorder.ID_PAKET);
+
+	}else{
+		var id = str[7];
+		var url = base_url+"index.php/pesan/GetPaket/"+id;
+		$.getJSON(url,function(data) {
+			pesan.dataMasterPaket(data)
+		})
+	}
+
+	
+
+	
 }
 
 pesan.recordPesan.ID_PAKET.subscribe(function(e) {
@@ -142,8 +162,75 @@ pesan.prosesPesan = function() {
     })
 }
 
+pesan.prosesUbah = function() {
+
+	var data = ko.mapping.toJS(pesan.recordPesan)
+
+	if (data.ID_PAKET == "") {
+		swal("error","anda memilh paket","error")
+	}
+	if (data.JENIS_HARGA == "perorangan") {
+		if (parseInt(data.KUOTA_PESAN) < parseInt(data.KUOTA_MINIMAL)) {
+			return swal("error","kuota anda kurang dari kuota minimal","error")
+		}
+		if (parseInt(data.KUOTA_PESAN) > parseInt(data.KUOTA_MAKSIMAL)) {
+			return swal("error","kuota anda melebihi batas maksimal","error")
+		}
+	}else{
+		data.KUOTA_PESAN = data.KUOTA_MAKSIMAL
+	}
+
+	data.TOTAL_TRANSAKSI = FormatCurrency(data.TOTAL_TRANSAKSI)
+
+	url = base_url+"index.php/pesan/ProsesPesan"
+    param = {
+        Data: data
+    }
+
+
+    swal({
+        title: "Apakah Anda yakin?",
+        text: "Mengubah pesanan ini",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, save it!',
+        cancelButtonText: 'No, cancel!',
+        buttonsStyling: true,
+        reverseButtons: true
+    }).then((result) => {
+        if (result.value) {
+            model.Processing(true)
+            ajaxFormPost(url, param, function(res) {
+                if (res != "") {
+                    swal("Gagal", res, "error")
+                } else {
+                    $("#paketModal").modal("hide")
+                    swal({
+                        title: "Berhasil!",
+                        text: "Data berhasil disimpan!",
+                        type: "success",
+                        confirmButtonColor: "#3da09a"
+                    }).then(() => {
+                    	window.location.assign(base_url+"index.php/riwayat_transaksi")
+                    });
+                }
+                model.Processing(false)
+            })
+        } else if (result.dismiss === 'cancel') {
+            swal(
+                'Dibatalkan',
+                '',
+                'info'
+            )
+        }
+    })
+}
+
 pesan.getKuotaTerpakai = function() {
 	var data = {
+		ID_ORDER			: pesan.recordPesan.ID_ORDER(),
 		ID_PAKET			: pesan.recordPesan.ID_PAKET(),
 		TANGGAL_BERANGKAT	: pesan.recordPesan.TANGGAL_BERANGKAT(),
 		TANGGAL_KEMBALI		: pesan.recordPesan.TANGGAL_KEMBALI()

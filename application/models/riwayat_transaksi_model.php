@@ -15,14 +15,12 @@ class Riwayat_transaksi_model extends CI_Model {
 
     public function GetDetail($ID_ORDER)
     {
-    	$this->db->select('ID_ORDER, NAMA_WISATA, NAMA_PAKET,KOTA , TANGGAL_BERANGKAT, TANGGAL_KEMBALI, KUOTA_PESAN,TOTAL_TRANSAKSI, order.STATUS AS STATUS, NAMA_ADMIN, NOMOR_TELPON, ALAMAT,BUKTI_BAYAR');
+    	$this->db->select('ID_ORDER, wisata.ID_WISATA, NAMA_WISATA, paket_harga.ID_PAKET, NAMA_PAKET,KOTA , TANGGAL_BERANGKAT, TANGGAL_KEMBALI, KUOTA_PESAN,TOTAL_TRANSAKSI, order.STATUS AS STATUS, NAMA_ADMIN, NOMOR_TELPON, ALAMAT,BUKTI_BAYAR');
 
     	$this->db->where('order.ID_ORDER', $ID_ORDER);
-    	// $this->db->join('customer', 'customer.ID_CUSTOMER = order.ID_CUSTOMER');
     	$this->db->join('paket_harga', 'paket_harga.ID_PAKET = order.ID_PAKET');
     	$this->db->join('wisata', 'wisata.ID_WISATA = paket_harga.ID_WISATA');
     	$this->db->join('admin', 'admin.ID_ADMIN = wisata.ID_ADMIN');
-    	$this->db->order_by('order.STATUS', 'DESC');
         return $this->db->get('order')->row();
     }
 
