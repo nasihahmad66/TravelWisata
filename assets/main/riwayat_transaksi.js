@@ -71,15 +71,24 @@ transaksi.renderGridTransaksi = function(textSearch) {
         }, {
             field: 'TANGGAL_BERANGKAT',
             title: 'Berangkat',
-            width: 100
+            width: 100,
+            template: function(val) {
+                return moment(val.TANGGAL_BERANGKAT).format("DD-MM-YYYY")
+            }
         }, {
             field: 'TANGGAL_KEMBALI',
             title: 'Kembali',
-            width: 100
+            width: 100,
+            template: function(val) {
+                return moment(val.TANGGAL_KEMBALI).format("DD-MM-YYYY")
+            }
         }, {
             field: 'TANGGAL_TRANSAKSI',
             title: 'Transaksi',
-            width: 100
+            width: 100,
+            template: function(val) {
+                return moment(val.TANGGAL_TRANSAKSI).format("DD-MM-YYYY")
+            }
         }, {
             field: 'KUOTA_PESAN',
             title: 'Jumlah',
