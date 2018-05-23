@@ -3,6 +3,8 @@ var transaksi = {}
 transaksi.dataMasterTransaksi = ko.observableArray([])
 transaksi.textSearch = ko.observable("")
 transaksi.ShowDetail = ko.observable(false)
+transaksi.showBtnCancel = ko.observable(false)
+transaksi.showBtnConfirm = ko.observable(false)
 
 
 transaksi.newDataDetailTransaksi = function() {
@@ -67,15 +69,24 @@ transaksi.renderGridTransaksi = function(textSearch) {
         }, {
             field: 'TANGGAL_BERANGKAT',
             title: 'Berangkat',
-            width: 100
+            width: 100,
+            template: function(val) {
+                return moment(val.TANGGAL_BERANGKAT).format("DD-MM-YYYY")
+            }
         }, {
             field: 'TANGGAL_KEMBALI',
             title: 'Kembali',
-            width: 100
+            width: 100,
+            template: function(val) {
+                return moment(val.TANGGAL_KEMBALI).format("DD-MM-YYYY")
+            }
         }, {
             field: 'TANGGAL_TRANSAKSI',
             title: 'Transaksi',
-            width: 100
+            width: 100,
+            template: function(val) {
+                return moment(val.TANGGAL_TRANSAKSI).format("DD-MM-YYYY")
+            }
         }, {
             field: 'KUOTA_PESAN',
             title: 'Jumlah',
@@ -130,6 +141,19 @@ transaksi.showEdit = function(ID_ORDER) {
         }else{
             $("#imgShow").attr( "src", base_url+"assets/image/default.jpg")
         }
+        data.TANGGAL_BERANGKAT = moment(data.TANGGAL_BERANGKAT).format("DD-MM-YYYY")
+        data.TANGGAL_KEMBALI = moment(data.TANGGAL_KEMBALI).format("DD-MM-YYYY")
+        data.TOTAL_TRANSAKSI = ChangeToRupiah(parseInt(data.TOTAL_TRANSAKSI))
+        if (data.STATUS == "order") {
+            transaksi.showBtnConfirm(false)
+            transaksi.showBtnCancel(true)
+        }else if (data.STATUS == "waiting") {
+            transaksi.showBtnConfirm(true)
+            transaksi.showBtnCancel(true)
+        }else{
+            transaksi.showBtnConfirm(false)
+            transaksi.showBtnCancel(false)
+        }
         ko.mapping.fromJS(data, transaksi.dataDetailTransaksi)
         // transaksi.dataDetailTransaksi(data)
     })
@@ -165,6 +189,7 @@ transaksi.konfirmasiPesanan = function() {
                     type: "success",
                     confirmButtonColor: "#3da09a"
                     }).then(() => {
+                        transaksi.ShowDetail(false)
                         transaksi.getDataTransaksi(function() {
                             transaksi.renderGridTransaksi("")
                         })
@@ -213,6 +238,7 @@ transaksi.batalkanPesanan = function() {
                     type: "success",
                     confirmButtonColor: "#3da09a"
                     }).then(() => {
+                        transaksi.ShowDetail(false)
                         transaksi.getDataTransaksi(function() {
                             transaksi.renderGridTransaksi("")
                         })

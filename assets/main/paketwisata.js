@@ -98,9 +98,12 @@ paketwisata.rendergridPaketWisata = function(textSearch) {
             title: 'Maks',
             width: 100
         }, {
-            field: 'HARGA',
+            // field: 'HARGA',
             title: 'harga',
-            width: 100
+            width: 100,
+            template: function(val) {
+                return ChangeToRupiah(parseInt(val.HARGA));
+            }
         }, {
             field: 'STATUS',
             title: 'status',
@@ -166,6 +169,8 @@ paketwisata.saveData = function() {
     } else {
         data.STATUS = 0
     }
+
+    data.HARGA = FormatCurrency(data.HARGA)
 
     url = "paketharga/SaveData"
     param = {
@@ -278,8 +283,20 @@ paketwisata.init = function() {
     })
 }
 
+paketwisata.maskingMoney = function () {
+    $('.currency').inputmask("numeric", {
+        radixPoint: ".",
+        groupSeparator: ",",
+        digits: 2,
+        autoGroup: true,
+        rightAlign: false,
+        allowMinus: false
+    });
+}
+
 $(function() {
     paketwisata.init()
     paketwisata.searchWhenEnterPressed()
     paketwisata.modalClosed()
+    paketwisata.maskingMoney()
 })

@@ -17,7 +17,7 @@
         </div>
         <div class="col-md-3 pull-right">
 			<div class="form-group input-group">
-			    <select style="width: 100%;" id="dropdownWisata" data-bind="kendoDropDownList: { data: paketwisata.dataMasterWisata, dataValueField: 'NAMA_WISATA', dataTextField: 'NAMA_WISATA',optionLabel:'Pilih wisata',filter: 'contains'}, value: paketwisata.dropdownSearch"></select>
+			    <select style="width: 100%;" id="dropdownWisata" data-bind="kendoDropDownList: { data: paketwisata.dataMasterWisata, dataValueField: 'NAMA_WISATA', dataTextField: 'NAMA_WISATA',optionLabel:'All..',filter: 'contains'}, value: paketwisata.dropdownSearch"></select>
 			</div>
 		</div>
 	</div>
@@ -75,7 +75,7 @@
 
                         <div class="form-group">
                             <label>Harga</label>
-                            <input type="number" class="form-control input-form" data-bind="value: HARGA">
+                            <input type="text" class="form-control input-form currency" data-bind="value: HARGA">
                         </div>
 
                         <div class="form-group">

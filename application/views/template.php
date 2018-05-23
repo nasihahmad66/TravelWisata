@@ -46,6 +46,14 @@
     <script src="<?= base_url() ?>assets/plugins/knockout/knockout.mapping-latest.js"></script>
     <script src="<?= base_url() ?>assets/plugins/knockout/knockout-kendo.min.js"></script>
 
+    <!-- MOMENT -->
+    <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.min.js"></script>
+
+    <!-- INPUT MASK -->
+    <script src="<?php echo base_url(); ?>assets/plugins/input-mask/inputmask.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/input-mask/inputmask.numeric.extensions.js"></script>
+    <script src="<?php echo base_url(); ?>assets/plugins/input-mask/jquery.inputmask.js"></script>
 
     <!-- Common -->
     <script src="<?= base_url() ?>assets/dist/js/common.js"></script>

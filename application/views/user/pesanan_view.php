@@ -63,7 +63,7 @@
 		            <div class="col-md-6 col-sm-6">
 		                <div class="form-group">
 		                    <label>Harga</label>
-		                    <input type="number" class="form-control input-form" data-bind="value: HARGA" disabled>
+		                    <input type="text" class="form-control input-form currency" data-bind="value: HARGA" disabled>
 		                </div>
 
 		                <div class="form-group">

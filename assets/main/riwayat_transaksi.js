@@ -145,6 +145,11 @@ transaksi.showEdit = function(ID_ORDER) {
             transaksi.showOrder(false)
             transaksi.showBtnCancel(false)
         }
+
+        data.TANGGAL_BERANGKAT = moment(data.TANGGAL_BERANGKAT).format("DD-MM-YYYY")
+        data.TANGGAL_KEMBALI = moment(data.TANGGAL_KEMBALI).format("DD-MM-YYYY")
+        data.TOTAL_TRANSAKSI = ChangeToRupiah(parseInt(data.TOTAL_TRANSAKSI))
+        
         ko.mapping.fromJS(data, transaksi.dataDetailTransaksi)
     })
     transaksi.ShowDetail(true)

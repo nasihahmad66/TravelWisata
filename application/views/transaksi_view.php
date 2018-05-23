@@ -145,10 +145,10 @@
                     <div class="col-md-4">
                         <button class="btn btn-block" type="submit" data-bind="click: function(){transaksi.ShowDetail(false)}">Kembali</button>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" data-bind="visible: transaksi.showBtnCancel()">
                         <button class="btn btn-danger btn-block" type="submit" onclick="transaksi.batalkanPesanan()">Batalakan</button>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" data-bind="visible: transaksi.showBtnConfirm()">
                         <button class="btn btn-success btn-block" type="submit" onclick="transaksi.konfirmasiPesanan()">Konfirmasi</button>
                     </div>
                 </div>

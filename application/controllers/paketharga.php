@@ -15,7 +15,7 @@ class Paketharga extends CI_Controller {
 		if ($this->session->userdata('login')!=true) {
 			redirect('login','refresh');
 		}else{
-			$data['title'] = 'Wisata';
+			$data['title'] = 'Paket Harga';
 			$data['main_view'] = 'paketharga_view';
 			$data['loader'] = 'loader';
 			$this->load->view('template.php', $data);

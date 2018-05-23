@@ -77,13 +77,14 @@ pesan.recordPesan.ID_PAKET.subscribe(function(e) {
 	dateStart = new Date(pesan.recordPesan.TANGGAL_BERANGKAT());
 	dateStart.setDate(dateStart.getDate()+parseInt(data[0].DURASI_WISATA));
 	data[0].TANGGAL_KEMBALI = moment(dateStart).format("YYYY-MM-DD");
+	data[0].HARGA = ChangeToRupiah(parseInt(data[0].HARGA))
 	ko.mapping.fromJS(data[0], pesan.recordPesan)
 
 	pesan.getKuotaTerpakai()
 })
 
 pesan.recordPesan.KUOTA_PESAN.subscribe(function(e) {
-	tot = parseInt(e)*parseInt(pesan.recordPesan.HARGA())
+	tot = parseInt(e)*FormatCurrency(pesan.recordPesan.HARGA())
 	pesan.recordPesan.TOTAL_TRANSAKSI(ChangeToRupiah(tot))
 })
 
@@ -260,6 +261,7 @@ pesan.getKuotaTerpakai = function() {
 		}
 	})
 }
+
 
 pesan.init = function() {
 	pesan.getDataPaket()

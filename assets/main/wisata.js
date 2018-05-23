@@ -64,7 +64,7 @@ wisata.rendergridWisata = function (textSearch) {
     },
     {
         field: 'NAMA_WISATA',
-        title: 'Nama Provinsi',
+        title: 'Nama Wisata',
         width: 200
     }, {
         field: 'KOTA',
