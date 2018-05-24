@@ -92,17 +92,22 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?= base_url() ?>index.php/login_page">Masuk</a>
                     </li>
+                    <li>
+                        <a class="nav-link" href="<?= base_url() ?>index.php/userguide">Help</a>
+                    </li>
                 <?php endif ?>
                 <?php if ($this->session->userdata('LOGIN') == TRUE): ?>
                     <li class="nav-item">
                         <a class="nav-link" href="<?= base_url() ?>index.php/riwayat_transaksi">Riwayat Transaksi</a>
                     </li>
                     <li class="nav-item dropdown">
+                        
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                         <?= $this->session->userdata('NAMA_CUSTOMER'); ?>
-                      </a>
+                        </a>
                         <div class="dropdown-menu bg-dark">
                             <a class="dropdown-item" href="<?= base_url() ?>index.php/login_page/DoLogout">Logout</a>
+                            <a class="dropdown-item" href="<?= base_url() ?>index.php/userguide">Help</a>
                             <!-- <a class="dropdown-item" href="#">Link 2</a>
                             <a class="dropdown-item" href="#">Link 3</a> -->
                         </div>

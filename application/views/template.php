@@ -85,6 +85,8 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <li>
+                    <a href="<?= base_url() ?>index.php/userguide">Help</a>
+                    <span> -- </span>
                     <a href="<?= base_url() ?>index.php/login/DoLogout">Logout</a>
                 </li>
             </ul>
